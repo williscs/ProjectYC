@@ -1,0 +1,8 @@
+<h1>This is the housing page</h1>
+
+<% housing.forEach(function(house){ %>
+    <div>
+        <h4><%= house.name %></h4>
+        <img src="<%= house.image%>"></img>
+    </div>
+<% }); %>

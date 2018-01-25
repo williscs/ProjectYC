@@ -7,24 +7,17 @@ app.get("/", function(req,res){
     res.render("landing")
 });
 
-// app.get("/housing", function(req,res){
-//     var housing = [
-//         {name:"1 bed apartment in Barca", image:"https://www.pexels.com/photo/stairs-home-loft-lifestyle-2459/"}
-//         {name:"2 bed apartment in Nice", image:""}
-//         {name:"1 bed apartment in Cannes", image:""}
-//     ]
-// })
+app.get("/housing", function(req,res){
+    var housing = [
+        {name:"1 bed apartment in Barca", image:"https://images.pexels.com/photos/275484/pexels-photo-275484.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
+        {name:"2 bed apartment in Nice", image:"https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
+        {name:"1 bed apartment in Cannes", image:"https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"}
+    ]
+    
+    res.render("housing", {housing:housing});
+})
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
    console.log("Yelpcamp app started");
 });
 
-// app.listen(3000,function(){
-// console.log("Yelpcamp server is running! ");
-// });
-
-
-// // app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
-//   var addr = server.address();
-//   console.log("Chat server listening at", addr.address + ":" + addr.port);
-// });
