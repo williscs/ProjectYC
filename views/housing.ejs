@@ -1,14 +1,30 @@
 <% include partials/header %>
 
-<h1>This is the housing page</h1>
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to housing in ProjectYC</h1>
+            <p>Take a look at what's available near you</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/housing/new">Add a new listing</a>
+            </p>
+        </div>
+    </header>
 
-<a href="/housing/new">Add a new listing</a>
-
-<% housing.forEach(function(house){ %>
-    <div>
-        <h4><%= house.name %></h4>
-        <img src="<%= house.image%>"></img>
+    <div class="card-deck text-center">
+        <% housing.forEach(function(house){ %>
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img class="card-img-top" src="<%= house.image%>"></img> 
+                    <div class="card-body">
+                        <h5><%= house.name %></h4>
+                    </div>
+                </div> 
+            </div>
+        <% }); %>
     </div>
-<% }); %>
+    
+    
+</div>
 
 <% include partials/footer %> 
