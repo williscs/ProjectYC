@@ -1,13 +1,25 @@
 <% include partials/header %>
 
-<h1>Create a new house </h1>
+<div class="container">
+    <div class="form-group">
+        <h1 style="text-align:center">Create a new house </h1>
+        <div style="width:30%; margin: 30px auto;">
+            <form action="/housing" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="test" name="name" placeholder="name"></input>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="test" name="image" placeholder="image url"></input>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/housing">Go back</a>
+        </div>
+    </div>
+</div>
 
-<form action="/housing" method="POST">
-    <input type="test" name="name" placeholder="name"></input>
-    <input type="test" name="image" placeholder="image url"></input>
-    <button>Submit</button>
-</form>
 
-<a href="/housing">Go back</a>
 
 <% include partials/footer %>
