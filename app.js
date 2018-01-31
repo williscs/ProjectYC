@@ -12,52 +12,37 @@ app.set("view engine", "ejs");
 // Schema setup
 var houseSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 var housing = mongoose.model("house", houseSchema);
-
-// house.create({name:"2 bed apartment in Nice", image:"https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
-//         function (err, house){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             console.log("newly created house");
-//             console.log(house);
-//         }
-//     });
-
-
-//  var housing = [
-//         {name:"1 bed apartment in Barca", image:"https://images.pexels.com/photos/275484/pexels-photo-275484.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
-//         {name:"2 bed apartment in Nice", image:"https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
-//         {name:"1 bed apartment in Cannes", image:"https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
-//         {name:"1 bed apartment in Barca", image:"https://images.pexels.com/photos/275484/pexels-photo-275484.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
-//         {name:"2 bed apartment in Nice", image:"https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"},
-//         {name:"1 bed apartment in Cannes", image:"https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb"}
-// ]
 
 
 app.get("/", function(req,res){
     res.render("landing")
 });
 
+
+// INDEX ROUTE - Show all houses
 app.get("/housing", function(req,res){
     // Get all houses from DB
     housing.find({}, function(err, allHousing){
         if(err){
             console.log("err");
         } else {
-            res.render("housing", {housing: allHousing});      
+            res.render("index", {housing: allHousing});      
         }
     })
 })
 
+// CREATE ROUTE - Add new house to DB
 app.post("/housing", function(req,res){
     // get data from form and add to housing array
     var name = req.body.name;
     var image = req.body.image;
-    var newHouse = {name: name, image: image}
+    var description= req.body.description;
+    var newHouse = {name: name, image: image, description: description}
     
     // Create a new house and save to db
     housing.create(newHouse, function(err, newlyCreated){
@@ -70,8 +55,24 @@ app.post("/housing", function(req,res){
     })
 });
 
+
+// NEW ROUTE - Show form to create new house
 app.get("/housing/new", function(req,res){
     res.render("new.ejs");
+});
+
+
+// SHOW ROUTE - Shows more info about one house
+app.get("/housing/:id", function(req,res){
+    // Find campground with provided id 
+    housing.findById(req.params.id, function(err, foundHouse){
+        if(err){
+            console.log(err);
+        } else {
+            // Render show template with that campground
+            res.render("show", {house: foundHouse});
+        }
+    });
 });
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
