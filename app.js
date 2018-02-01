@@ -43,7 +43,7 @@ app.post("/housing", function(req,res){
     // get data from form and add to housing array
     var name = req.body.name;
     var image = req.body.image;
-    var description= req.body.description;
+    var description= req.sanitize(req.body.description);
     var newHouse = {name: name, image: image, description: description}
     
     // Create a new house and save to db
