@@ -1,10 +1,12 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost/house");
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(expressSanitizer());
 app.set("view engine", "ejs");
 
 
