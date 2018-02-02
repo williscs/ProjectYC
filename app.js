@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
+var housing = require("./models/house");
 
 mongoose.connect("mongodb://localhost/house");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -11,14 +12,6 @@ app.set("view engine", "ejs");
 
 
 
-// Schema setup
-var houseSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-var housing = mongoose.model("house", houseSchema);
 
 
 app.get("/", function(req,res){
