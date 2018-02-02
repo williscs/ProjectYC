@@ -4,7 +4,9 @@ var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
 var housing = require("./models/house");
+var seedDB = require("./seeds");
 
+seedDB();
 mongoose.connect("mongodb://localhost/house");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSanitizer());
