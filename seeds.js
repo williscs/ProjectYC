@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
-var housing = require("./models/house");
-// var Comment   = require("./models/comment");
+var house = require("./models/house");
+var Comment   = require("./models/comment");
 
 var data = [
     {
@@ -22,40 +22,40 @@ var data = [
 
 function seedDB(){
    //Remove all houses
-   housing.remove({}, function(err){
+   house.remove({}, function(err){
         if(err){
             console.log(err);
         }
         console.log("removed houses!");
-        // Comment.remove({}, function(err) {
-        //     if(err){
-        //         console.log(err);
-        //     }
-        //     console.log("removed comments!");
-        //      //add a few campgrounds
+        Comment.remove({}, function(err) {
+            if(err){
+                console.log(err);
+            }
+            console.log("removed comments!");
+             //add a few campgrounds
             data.forEach(function(seed){
-                housing.create(seed, function(err, house){
+                house.create(seed, function(err, house){
                     if(err){
                         console.log(err)
                     } else {
                         console.log("added a campground");
-        //                 //create a comment
-        //                 Comment.create(
-        //                     {
-        //                         text: "This place is great, but I wish there was internet",
-        //                         author: "Homer"
-        //                     }, function(err, comment){
-        //                         if(err){
-        //                             console.log(err);
-        //                         } else {
-        //                             housing.comments.push(comment._id);
-        //                             housing.save();
-        //                             console.log("Created new comment");
-        //                         }
-        //                     });
+                        //create a comment
+                        Comment.create(
+                            {
+                                text: "This place is great, but I wish there was internet",
+                                author: "Homer"
+                            }, function(err, comment){
+                                if(err){
+                                    console.log(err);
+                                } else {
+                                    house.comments.push(comment._id);
+                                    house.save();
+                                    console.log("Created new comment");
+                                }
+                            });
                     }
                 });
-        //     });
+            });
         });
     }); 
     //add a few comments

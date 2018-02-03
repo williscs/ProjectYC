@@ -3,15 +3,15 @@ var app = express();
 var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
-var housing = require("./models/house");
+var house = require("./models/house");
 var seedDB = require("./seeds");
 
-seedDB();
+
 mongoose.connect("mongodb://localhost/house");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSanitizer());
 app.set("view engine", "ejs");
-
+seedDB();
 
 
 
@@ -24,7 +24,7 @@ app.get("/", function(req,res){
 // INDEX ROUTE - Show all houses
 app.get("/housing", function(req,res){
     // Get all houses from DB
-    housing.find({}, function(err, allHousing){
+    house.find({}, function(err, allHousing){
         if(err){
             console.log("err");
         } else {
@@ -42,7 +42,7 @@ app.post("/housing", function(req,res){
     var newHouse = {name: name, image: image, description: description}
     
     // Create a new house and save to db
-    housing.create(newHouse, function(err, newlyCreated){
+    house.create(newHouse, function(err, newlyCreated){
         if(err){
             console.log(err)
         } else {
@@ -59,10 +59,15 @@ app.get("/housing/new", function(req,res){
 });
 
 
+
+
+
+
+
 // SHOW ROUTE - Shows more info about one house
 app.get("/housing/:id", function(req,res){
     // Find campground with provided id 
-    housing.findById(req.params.id, function(err, foundHouse){
+    house.findById(req.params.id).populate("comments").exec(function(err, foundHouse){
         if(err){
             console.log(err);
         } else {
@@ -71,6 +76,11 @@ app.get("/housing/:id", function(req,res){
         }
     });
 });
+
+
+
+
+
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
    console.log("Yelpcamp app started");

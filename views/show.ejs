@@ -6,4 +6,10 @@
 
 <p><%=house.description%></p>
 
+
+<% house.comments.forEach(function(Comment){ %>
+    <p>
+        <strong><%= Comment.author %></strong>- <%= Comment.text %>
+    </p>
+<% }); %>
 <% include partials/footer %> 
