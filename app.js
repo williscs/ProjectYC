@@ -28,7 +28,7 @@ app.get("/housing", function(req,res){
         if(err){
             console.log("err");
         } else {
-            res.render("index", {housing: allHousing});      
+            res.render("house/index", {housing: allHousing});      
         }
     })
 })
@@ -55,12 +55,8 @@ app.post("/housing", function(req,res){
 
 // NEW ROUTE - Show form to create new house
 app.get("/housing/new", function(req,res){
-    res.render("new.ejs");
+    res.render("house/new");
 });
-
-
-
-
 
 
 
@@ -72,14 +68,26 @@ app.get("/housing/:id", function(req,res){
             console.log(err);
         } else {
             // Render show template with that campground
-            res.render("show", {house: foundHouse});
+            res.render("house/show", {house: foundHouse});
         }
     });
 });
 
 
+// ========================
+// COMMENTS ROUTE   
+// ========================
 
-
+app.get("/housing/:id/comments/new", function(req, res){
+    // Find house by ID 
+    house.findById(req.params.id, function(err, house){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("comments/new", {house: house});      
+        }
+    })
+})
 
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
