@@ -6,6 +6,9 @@
 
 <p><%=house.description%></p>
 
+<p>
+    <a class="btn btn-success" href="/housing/<%= house._id %>/comments/new">Add New Comment</a>
+</p>
 
 <% house.comments.forEach(function(Comment){ %>
     <p>

@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
 var house = require("./models/house");
+var comment = require("./models/comment");
 var seedDB = require("./seeds");
 
 
@@ -88,6 +89,30 @@ app.get("/housing/:id/comments/new", function(req, res){
         }
     })
 })
+
+
+app.post("/housing/:id/comments", function(req,res){
+    //lookup house using ID
+    house.findById(req.params.id, function(err, house){
+        if(err){
+            console.log(err);
+            res.redirect("/housing");
+        } else {
+            // create new comment
+            comment.create(req.body.comment, function(err, comment){
+                if(err){
+                    console.log(err);
+                } else {
+                    // connect new comment to house
+                   house.comments.push(comment._id);
+                   house.save();
+                    // redirect to house show page
+                   res.redirect('/housing/' + house._id);
+                }
+            })
+        }
+    });
+});
 
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
