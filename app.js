@@ -12,6 +12,7 @@ mongoose.connect("mongodb://localhost/house");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSanitizer());
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 seedDB();
 
 

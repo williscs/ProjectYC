@@ -14,23 +14,30 @@
             <div class="card">
                 <img class="card-img-top" src="<%= house.image %>">
                 <div class="caption-full">
-                    <h4 class="text-right">$9/night</h4>
+                    <h4 class="float-right">$9/night</h4>
                     <h4><a><%=house.name%></a></h4>
                     <p><%=house.description%></p>
                 </div>
+            </div>
+            <div class="alert alert-secondary">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/housing/<%= house._id %>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+                <% house.comments.forEach(function(Comment){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                            <strong><%= Comment.author %></strong>
+                            <span class="float-right">10 days ago</span>
+                        <p>
+                            <%= Comment.text %>
+                        </p>
+                    </div>
+                </div>
+                <% }); %>
             </div>
         </div>
     </div>
 </div>
 
-
-<p>
-    <a class="btn btn-success" href="/housing/<%= house._id %>/comments/new">Add New Comment</a>
-</p>
-
-<% house.comments.forEach(function(Comment){ %>
-    <p>
-        <strong><%= Comment.author %></strong>- <%= Comment.text %>
-    </p>
-<% }); %>
 <% include ../partials/footer %> 
