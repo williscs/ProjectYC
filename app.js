@@ -4,6 +4,9 @@ var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
 var house = require("./models/house");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var User = require("./models/user");
 var comment = require("./models/comment");
 var seedDB = require("./seeds");
 
