@@ -31,7 +31,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
+app.use(function(req,res,next){
+   res.locals.currentUser= req.user;
+   next();
+});
 
 app.get("/", function(req,res){
     res.render("landing")
@@ -95,7 +98,7 @@ app.get("/housing/:id", function(req,res){
 // COMMENTS ROUTE   
 // ========================
 
-app.get("/housing/:id/comments/new", function(req, res){
+app.get("/housing/:id/comments/new", isLoggedIn, function(req, res){
     // Find house by ID 
     house.findById(req.params.id, function(err, house){
         if(err){
@@ -107,7 +110,7 @@ app.get("/housing/:id/comments/new", function(req, res){
 })
 
 
-app.post("/housing/:id/comments", function(req,res){
+app.post("/housing/:id/comments", isLoggedIn,  function(req,res){
     //lookup house using ID
     house.findById(req.params.id, function(err, house){
         if(err){
@@ -168,6 +171,20 @@ app.post("/login", passport.authenticate("local",
     }), function(req,res){
     
 });
+
+// Logout route 
+app.get("/logout", function(req,res){
+    req.logout();
+    res.redirect("/housing");
+});
+
+
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
    console.log("Yelpcamp app started");
