@@ -154,6 +154,21 @@ app.post("/register", function(req, res){
    });
 });
 
+
+// Show loging form
+app.get("/login", function(req,res){
+    res.render("login");
+});
+
+// Login route
+app.post("/login", passport.authenticate("local", 
+    {
+        successRedirect: "/housing",
+        failureRedirect:"/login"
+    }), function(req,res){
+    
+});
+
 app.listen(process.env.PORT,process.env.IP, function (argument) {
    console.log("Yelpcamp app started");
 });
