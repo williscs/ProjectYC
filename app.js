@@ -10,6 +10,7 @@ var User = require("./models/user");
 var comment = require("./models/comment");
 var seedDB = require("./seeds");
 
+// Requiring routes
 var commentRoutes = require("./routes/comments");
 var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
