@@ -27,7 +27,7 @@
                 <% house.comments.forEach(function(Comment){ %>
                 <div class="row">
                     <div class="col-md-12">
-                            <strong><%= Comment.author %></strong>
+                            <strong><%= Comment.author.username %></strong>
                             <span class="float-right">10 days ago</span>
                         <p>
                             <%= Comment.text %>
