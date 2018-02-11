@@ -17,12 +17,16 @@ router.get("/", function(req,res){
 })
 
 // CREATE ROUTE - Add new house to DB
-router.post("/", function(req,res){
+router.post("/", isLoggedIn, function(req,res){
     // get data from form and add to housing array
     var name = req.body.name;
     var image = req.body.image;
     var description= req.sanitize(req.body.description);
-    var newHouse = {name: name, image: image, description: description}
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    var newHouse = {name: name, image: image, description: description, author: author}
     
     // Create a new house and save to db
     house.create(newHouse, function(err, newlyCreated){
@@ -37,7 +41,7 @@ router.post("/", function(req,res){
 
 
 // NEW ROUTE - Show form to create new house
-router.get("/new", function(req,res){
+router.get("/new", isLoggedIn, function(req,res){
     res.render("house/new");
 });
 
@@ -55,5 +59,13 @@ router.get("/:id", function(req,res){
         }
     });
 });
+
+// Middleware
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;
