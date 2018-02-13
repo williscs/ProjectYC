@@ -60,6 +60,31 @@ router.get("/:id", function(req,res){
     });
 });
 
+
+// EDIT HOUSE ROUTE 
+router.get("/:id/edit", function(req, res){
+    house.findById(req.params.id, function(err, foundHouse){
+        if(err) {
+            res.redirect("/house")
+        } else {
+            res.render("house/edit", {house: foundHouse});      
+        }
+    });
+});
+
+// UPDATE HOUSE ROUTE
+router.put("/:id", function(req,res){
+    // Find and update the correct house
+    house.findByIdAndUpdate(req.params.id, req.body.house, function(err, updatedHouse){
+        if(err){
+            res.redirect("/house");
+        } else {
+            res.redirect("/housing/" + req.params.id);
+        }
+    })
+    // Redirect to somewhere
+})
+
 // Middleware
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
