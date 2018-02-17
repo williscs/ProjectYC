@@ -81,9 +81,21 @@ router.put("/:id", function(req,res){
         } else {
             res.redirect("/housing/" + req.params.id);
         }
-    })
+    });
     // Redirect to somewhere
-})
+});
+
+
+// DESTROY HOUSE ROUTE 
+router.delete("/:id", function(req,res){
+   house.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           res.redirect("/housing");
+       } else {
+           res.redirect("/housing");
+       }
+   }); 
+});
 
 // Middleware
 function isLoggedIn(req,res,next){

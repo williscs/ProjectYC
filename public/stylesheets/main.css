@@ -9,3 +9,7 @@ nav {
 .card {
     margin-bottom: 10px;
 }
+
+#delete-form {
+    display:inline;
+}
