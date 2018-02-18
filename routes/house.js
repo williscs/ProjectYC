@@ -62,13 +62,9 @@ router.get("/:id", function(req,res){
 
 
 // EDIT HOUSE ROUTE 
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", checkHouseOwnership, function(req, res){
     house.findById(req.params.id, function(err, foundHouse){
-        if(err) {
-            res.redirect("/house")
-        } else {
-            res.render("house/edit", {house: foundHouse});      
-        }
+            res.render("house/edit", {house: foundHouse});
     });
 });
 
@@ -103,6 +99,26 @@ function isLoggedIn(req,res,next){
         return next();
     }
     res.redirect("/login");
+}
+
+function checkHouseOwnership(req,res,next){
+    if(req.isAuthenticated()){
+            house.findById(req.params.id, function(err, foundHouse){
+                if(err) {
+                    res.redirect("back");
+                } else {
+                        // Does user own house?
+                        if(foundHouse.author.id.equals(req.user._id)){
+                            next();
+                        } else {
+                            res.redirect("back");
+                        }
+                }
+            });
+            
+        } else {
+            res.redirect("back");
+        }
 }
 
 module.exports = router;
