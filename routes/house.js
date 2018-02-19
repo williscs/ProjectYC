@@ -69,7 +69,7 @@ router.get("/:id/edit", checkHouseOwnership, function(req, res){
 });
 
 // UPDATE HOUSE ROUTE
-router.put("/:id", function(req,res){
+router.put("/:id", checkHouseOwnership, function(req,res){
     // Find and update the correct house
     house.findByIdAndUpdate(req.params.id, req.body.house, function(err, updatedHouse){
         if(err){
@@ -83,7 +83,7 @@ router.put("/:id", function(req,res){
 
 
 // DESTROY HOUSE ROUTE 
-router.delete("/:id", function(req,res){
+router.delete("/:id", checkHouseOwnership, function(req,res){
    house.findByIdAndRemove(req.params.id, function(err){
        if(err){
            res.redirect("/housing");

@@ -18,10 +18,12 @@
                     <h4><a><%=house.name%></a></h4>
                     <p><%=house.description%></p>
                     <p><em>Submitted by <%=house.author.username%></em></p>
+                    <% if(currentUser && house.author.id.equals(currentUser._id)){ %>
                     <a class="btn btn-warning" href="/housing/<%=house._id%>/edit">Edit</a>
                     <form id="delete-form" action="/housing/<%=house._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
+                    <% } %>
                 </div>
             </div>
             <div class="alert alert-secondary">
