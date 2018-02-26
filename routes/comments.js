@@ -45,6 +45,26 @@ router.post("/", isLoggedIn,  function(req,res){
     });
 });
 
+// COMMENT EDIT ROUTE
+router.get("/:comment_id/edit", function(req,res){
+    comment.findById(req.params.comment_id, function(err, foundComment){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.render("comments/edit", {house_id : req.params.id, comment: foundComment});     
+        }
+    });
+});
+
+router.put("/:comment_id", function(req,res){
+    comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+        if(err){
+            res.redirect("back")
+        } else {
+            res.redirect("/housing/" + req.params.id);
+        }
+    })
+})
 
 // Middleware
 function isLoggedIn(req,res,next){

@@ -39,6 +39,10 @@
                         <p>
                             <%= Comment.text %>
                         </p>
+                        <a class="btn btn-xs btn-warning" 
+                            href="/housing/<%=house._id%>/comments/<%=Comment._id%>/edit">
+                            Edit
+                        </a>
                     </div>
                 </div>
                 <% }); %>
