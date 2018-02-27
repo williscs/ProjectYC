@@ -20,7 +20,7 @@
                     <p><em>Submitted by <%=house.author.username%></em></p>
                     <% if(currentUser && house.author.id.equals(currentUser._id)){ %>
                     <a class="btn btn-warning" href="/housing/<%=house._id%>/edit">Edit</a>
-                    <form id="delete-form" action="/housing/<%=house._id%>?_method=DELETE" method="POST">
+                    <form class="delete-form" action="/housing/<%=house._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                     <% } %>
@@ -43,6 +43,9 @@
                             href="/housing/<%=house._id%>/comments/<%=Comment._id%>/edit">
                             Edit
                         </a>
+                        <form class="delete-form" action="/housing/<%=house._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
+                            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                        </form>
                     </div>
                 </div>
                 <% }); %>

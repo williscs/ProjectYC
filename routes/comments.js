@@ -66,6 +66,19 @@ router.put("/:comment_id", function(req,res){
     })
 })
 
+
+
+// COMMENT DESTROY ROUTE 
+router.delete("/:comment_id", function(req, res){
+    comment.findByIdAndRemove(req.params.comment_id, function(err){
+       if(err){
+           res.redirect("back");
+       } else {
+           res.redirect("/housing/" + req.params.id);
+       }
+    });
+});
+
 // Middleware
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
