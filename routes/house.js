@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var house = require("../models/house");
 var comment = require("../models/comment");
+var middleware = require("../middleware");
 
 
 // INDEX ROUTE - Show all houses
@@ -17,7 +18,7 @@ router.get("/", function(req,res){
 })
 
 // CREATE ROUTE - Add new house to DB
-router.post("/", isLoggedIn, function(req,res){
+router.post("/", middleware.isLoggedIn, function(req,res){
     // get data from form and add to housing array
     var name = req.body.name;
     var image = req.body.image;
@@ -41,7 +42,7 @@ router.post("/", isLoggedIn, function(req,res){
 
 
 // NEW ROUTE - Show form to create new house
-router.get("/new", isLoggedIn, function(req,res){
+router.get("/new", middleware.isLoggedIn, function(req,res){
     res.render("house/new");
 });
 
@@ -62,14 +63,14 @@ router.get("/:id", function(req,res){
 
 
 // EDIT HOUSE ROUTE 
-router.get("/:id/edit", checkHouseOwnership, function(req, res){
+router.get("/:id/edit", middleware.checkHouseOwnership, function(req, res){
     house.findById(req.params.id, function(err, foundHouse){
             res.render("house/edit", {house: foundHouse});
     });
 });
 
 // UPDATE HOUSE ROUTE
-router.put("/:id", checkHouseOwnership, function(req,res){
+router.put("/:id", middleware.checkHouseOwnership, function(req,res){
     // Find and update the correct house
     house.findByIdAndUpdate(req.params.id, req.body.house, function(err, updatedHouse){
         if(err){
@@ -83,7 +84,7 @@ router.put("/:id", checkHouseOwnership, function(req,res){
 
 
 // DESTROY HOUSE ROUTE 
-router.delete("/:id", checkHouseOwnership, function(req,res){
+router.delete("/:id", middleware.checkHouseOwnership, function(req,res){
    house.findByIdAndRemove(req.params.id, function(err){
        if(err){
            res.redirect("/housing");
@@ -93,32 +94,6 @@ router.delete("/:id", checkHouseOwnership, function(req,res){
    }); 
 });
 
-// Middleware
-function isLoggedIn(req,res,next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
 
-function checkHouseOwnership(req,res,next){
-    if(req.isAuthenticated()){
-            house.findById(req.params.id, function(err, foundHouse){
-                if(err) {
-                    res.redirect("back");
-                } else {
-                        // Does user own house?
-                        if(foundHouse.author.id.equals(req.user._id)){
-                            next();
-                        } else {
-                            res.redirect("back");
-                        }
-                }
-            });
-            
-        } else {
-            res.redirect("back");
-        }
-}
 
 module.exports = router;
