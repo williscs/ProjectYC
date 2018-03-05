@@ -7,6 +7,7 @@ var house = require("./models/house");
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
+var flash = require("connect-flash");
 var methodOverride = require("method-override")
 var comment = require("./models/comment");
 var seedDB = require("./seeds");
@@ -23,6 +24,7 @@ app.use(expressSanitizer());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 // Seed the database
 // seedDB();
 
