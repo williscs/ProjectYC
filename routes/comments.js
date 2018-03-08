@@ -22,6 +22,7 @@ router.post("/", middleware.isLoggedIn,  function(req,res){
     //lookup house using ID
     house.findById(req.params.id, function(err, house){
         if(err){
+            req.flash("error", "Something went wrong");
             console.log(err);
             res.redirect("/housing");
         } else {
@@ -39,6 +40,7 @@ router.post("/", middleware.isLoggedIn,  function(req,res){
                    house.comments.push(comment._id);
                    house.save();
                     // redirect to house show page
+                    req.flash("success", "Successfully created comment");
                    res.redirect('/housing/' + house._id);
                 }
             })
@@ -76,6 +78,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
        if(err){
            res.redirect("back");
        } else {
+           req.flash("success", "Comment deleted");
            res.redirect("/housing/" + req.params.id);
        }
     });
