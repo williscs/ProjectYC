@@ -1,0 +1,82 @@
+body {
+  background-color: #000;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: #fff;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url(https://i.pinimg.com/originals/a4/96/a5/a496a5d4a9bdf22a7ff1fd0433e22719.jpg) 
+}
+.slideshow li:nth-child(2) { 
+  background-image: url(https://static1.squarespace.com/static/54632380e4b058ea42820a04/t/5463a962e4b0e7402bfa2e5d/1415817571688/shutterstock_200324711.jpg?format=1500w);
+  animation-delay: 10s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url(http://superyachts.agent4stars.com/wp-content/uploads/2017/08/AL-LUSAIL-124-meter-Super-Yacht-by-Lu%CC%88rssen-Yachts-first-visit-to-the-MED-28th-of-AUG-2017-aaaa.jpg);
+  animation-delay: 20s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url(http://superyacht.jonbesinan.com/media/simple-responsive-slideshow/demo/slide4.jpg);
+  animation-delay: 30s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url(https://robbreportedit.files.wordpress.com/2017/10/lurssen-yachts.jpg?w=1000);
+  animation-delay: 40s; 
+}
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}
