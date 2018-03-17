@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Make site responsive on mobile/tablet -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ProjectYC</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" ></link>
         <link rel="stylesheet" href="/stylesheets/main.css">
@@ -9,15 +11,18 @@
     </head>
     <body>
         
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">ProjectYC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav">
+                <li class="<%= typeof page !== 'undefined' && page === 'housing' ? 'active' : '' %>"><a href="/housing">Home</a></li>
+            </ul>
             <ul class="navbar-nav mr-auto">
                 <% if(!currentUser){ %>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -35,6 +40,7 @@
         </div>
     </nav>
     
+    
     <div class="container">
         <% if(error && error.length > 0){ %>
         <div class="alert alert-danger" role="alert">
@@ -47,5 +53,7 @@
         </div>
         <% } %>
     </div>
+    
+    <div class="container">
     
         

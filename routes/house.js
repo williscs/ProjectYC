@@ -12,10 +12,11 @@ router.get("/", function(req,res){
         if(err){
             console.log("err");
         } else {
-            res.render("house/index", {housing: allHousing});      
+            res.render("house/index", {housing: allHousing, page: 'housing'});      
         }
     })
 })
+
 
 // CREATE ROUTE - Add new house to DB
 router.post("/", middleware.isLoggedIn, function(req,res){
