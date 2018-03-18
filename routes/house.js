@@ -7,15 +7,32 @@ var middleware = require("../middleware");
 
 // INDEX ROUTE - Show all houses
 router.get("/", function(req,res){
+    var noMatch = null;
+    // eval(require('locus'));
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+            house.find({name: regex}, function(err, allHousing){
+                if(err){
+                    console.log("err");
+                } else {
+                    if(allHousing.length < 1 ){
+                        var noMatch = "Sorry, no houses match your query";
+                    }
+                    res.render("house/index", {housing: allHousing, page: 'housing', noMatch: noMatch});      
+                }
+            });
+    } else {
+        
     // Get all houses from DB
     house.find({}, function(err, allHousing){
         if(err){
             console.log("err");
         } else {
-            res.render("house/index", {housing: allHousing, page: 'housing'});      
+            res.render("house/index", {housing: allHousing, page: 'housing', noMatch: noMatch});      
         }
-    })
-})
+    });
+    }   
+});
 
 
 // CREATE ROUTE - Add new house to DB
@@ -96,5 +113,8 @@ router.delete("/:id", middleware.checkHouseOwnership, function(req,res){
 });
 
 
+function escapeRegex(text) {
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;
