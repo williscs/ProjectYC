@@ -12,7 +12,7 @@ middlewareObj.checkHouseOwnership = function(req,res,next){
                         res.redirect("back");
                     } else {
                             // Does user own house?
-                            if(foundHouse.author.id.equals(req.user._id)){
+                            if(foundHouse.author.id.equals(req.user._id) || req.user.isAdmin){
                                 next();
                             } else {
                                 req.flash("error", "You don't have permission to do that");
@@ -35,7 +35,7 @@ middlewareObj.checkCommentOwnership = function(req,res,next){
                     res.redirect("back");
                 } else {
                         // Does user own comment?
-                        if(foundComment.author.id.equals(req.user._id)){
+                        if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
                             next();
                         } else {
                             req.flash("error", "You don't have permission to do that");
