@@ -18,7 +18,9 @@ var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
 
 
-mongoose.connect("mongodb://localhost/house");
+// mongoose.connect("mongodb://localhost/house");
+mongoose.connect("mongodb://scwillis:Ronisawanker1993@ds121299.mlab.com:21299/projectyc");
+// mongodb://scwillis:Ronisawanker1993@ds121299.mlab.com:21299/projectyc
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSanitizer());
 app.set("view engine", "ejs");
