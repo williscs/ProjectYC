@@ -18,7 +18,7 @@
                     <h4><a><%=house.name%></a></h4>
                     <p><%=house.description%></p>
                     <p><em>Submitted by <%=house.author.username%></em></p>
-                    <% if(currentUser && house.author.id.equals(currentUser._id)){ %>
+                    <% if(currentUser && house.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                     <a class="btn btn-warning" href="/housing/<%=house._id%>/edit">Edit</a>
                     <form class="delete-form" action="/housing/<%=house._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
@@ -39,7 +39,7 @@
                         <p>
                             <%= Comment.text %>
                         </p>
-                    <% if(currentUser && Comment.author.id.equals(currentUser._id)){ %>
+                    <% if(currentUser && Comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-xs btn-warning" 
                             href="/housing/<%=house._id%>/comments/<%=Comment._id%>/edit">
                             Edit
