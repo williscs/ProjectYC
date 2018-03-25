@@ -16,6 +16,7 @@ var seedDB = require("./seeds");
 var commentRoutes = require("./routes/comments");
 var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
+var blogRoutes = require("./routes/blog");
 
 
 var url = process.env.DATABASEURL ||  "mongodb://localhost/house"
@@ -55,6 +56,7 @@ app.use(function(req,res,next){
 app.use("/", indexRoutes);
 app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
+app.use("/blog", blogRoutes);
 
 
 
