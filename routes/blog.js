@@ -6,7 +6,7 @@ var middleware = require("../middleware");
 
 // INDEX ROUTE - Show all houses
 router.get("/blog", function(req,res){
-    res.redender("blog/index");
+    res.render("blog/index");
 });
 
 
