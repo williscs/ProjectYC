@@ -14,3 +14,13 @@ nav {
     display:inline;
 }
 
+
+
+/* ---------- Blog Form ------------*/
+
+.blog-submit-form {
+    width:50%;
+    margin: 50px auto;
+}
+
+
