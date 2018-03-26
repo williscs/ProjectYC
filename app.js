@@ -58,9 +58,9 @@ app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
 app.use("/blog", blogRoutes);
 
-// app.get("/blog", function(req,res){
-//     res.render("blog/index");
-// });
+app.get("/blog", function(req,res){
+    res.render("blog/index");
+});
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
    console.log("Yelpcamp app started");

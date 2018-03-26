@@ -5,7 +5,7 @@ var comment = require("../models/comment");
 var middleware = require("../middleware");
 
 // INDEX ROUTE - Show all houses
-router.get("/blog", function(req,res){
+router.get("/", function(req,res){
     res.render("blog/index");
 });
 
