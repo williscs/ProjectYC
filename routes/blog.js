@@ -6,7 +6,14 @@ var middleware = require("../middleware");
 
 // INDEX ROUTE - Show all houses
 router.get("/", function(req,res){
-    res.render("blog/index");
+    // Get all blogs from DB
+    blog.find({}, function(err, allBlogs){
+        if (err){
+            console.log(err)
+        } else {
+            res.render("blog/index", {blog: allBlogs, page: 'blog'});      
+        }
+    })
 });
 
 

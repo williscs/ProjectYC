@@ -9,16 +9,18 @@
     </header>
     
     <div class="card-deck text-center">
+        <% blog.forEach(function(blog){ %>
             <div class="col-md-4 col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Blog Name</h4>
+                        <h4><%= blog.name %></h4>
                     </div>
                     <p>
                         This is where a description of the blog will go.
                     </p>
                 </div> 
             </div>
+        <% }); %>
     </div>
 
 <% include ../partials/footer %>

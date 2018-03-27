@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
 var house = require("./models/house");
+var blog = require("./models/blog");
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
@@ -58,9 +59,9 @@ app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
 app.use("/blog", blogRoutes);
 
-app.get("/blog", function(req,res){
-    res.render("blog/index");
-});
+// app.get("/blog", function(req,res){
+    // res.render("blog/index");
+// });
 
 app.listen(process.env.PORT,process.env.IP, function (argument) {
    console.log("Yelpcamp app started");
