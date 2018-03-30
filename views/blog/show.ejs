@@ -1,3 +1,51 @@
 <% include ../partials/header %>
 
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">ProjectYC</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="caption-full">
+                    <h4 class="float-right">$9/night</h4>
+                    <h4><a><%=blog.name%></a></h4>
+                    <p><%=blog.description%></p>
+                    <p><em>Submitted by <%=blog.author.username%></em></p>
+                    <p><%=blog.text%></p>
+                </div>
+            </div>
+            <div class="alert alert-secondary">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/blog/<%= blog._id %>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+                <% blog.comments.forEach(function(Comment){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                            <strong><%= Comment.author.username %></strong>
+                            <span class="float-right">10 days ago</span>
+                        <p>
+                            <%= Comment.text %>
+                        </p>
+                    <% if(currentUser && Comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                        <a class="btn btn-xs btn-warning" 
+                            href="/housing/<%=blog._id%>/comments/<%=Comment._id%>/edit">
+                            Edit
+                        </a>
+                        <form class="delete-form" action="/housing/<%=blog._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
+                            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                        </form>
+                    <% } %>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+
 <% include ../partials/footer %> 
