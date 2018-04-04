@@ -12,11 +12,16 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="caption-full">
-                    <h4 class="float-right">$9/night</h4>
                     <h4><a><%=blog.name%></a></h4>
                     <p><%=blog.description%></p>
                     <p><em>Submitted by <%=blog.author.username%></em></p>
-                    <p><%=blog.text%></p>
+                    <p id="blog-text-area"><%=blog.text%></p>
+                    <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                    <a class="btn btn-warning" href="/blog/<%=blog._id%>/edit">Edit</a>
+                    <form class="delete-form" action="/blog/<%=blog._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <% } %>
                 </div>
             </div>
             <div class="alert alert-secondary">

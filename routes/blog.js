@@ -65,7 +65,7 @@ router.get("/:id", function(req,res){
 // EDIT blog ROUTE 
 router.get("/:id/edit", middleware.checkBlogOwnership, function(req, res){
     blog.findById(req.params.id, function(err, foundBlog){
-            res.render("blog/edit", {blog: foundBlog});
+            res.render("blog/edit", {blog: foundBlog, document:foundBlog.text});
     });
 });
 

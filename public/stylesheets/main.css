@@ -37,4 +37,8 @@ nav {
     margin-bottom: 20px;
 }
 
+#blog-text-area {
+    white-space: pre-wrap;
+}
+
 
