@@ -24,11 +24,12 @@ router.post("/", middleware.isLoggedIn,function(req,res){
     var image = req.body.image;
     var description= req.sanitize(req.body.description);
     var text = req.sanitize(req.body.text);
+    var tag = {name:req.body.tag};
     var author = {
         id: req.user._id,
         username: req.user.username
     };
-    var newBlog = {name: name, image: image, description: description, text:text, author: author}
+    var newBlog = {name: name, image: image, description: description, text:text, tag:tag, author: author};
     
     // Create a new blog and save to db
     blog.create(newBlog, function(err, newlyCreated){
