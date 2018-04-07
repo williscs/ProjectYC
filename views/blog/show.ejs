@@ -14,6 +14,7 @@
                 <div class="caption-full">
                     <h4><a><%=blog.name%></a></h4>
                     <p><%=blog.description%></p>
+                    <p><%=blog.tag%></p>
                     <p><em>Submitted by <%=blog.author.username%></em></p>
                     <p id="blog-text-area"><%=blog.text%></p>
                     <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>

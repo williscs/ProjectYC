@@ -24,7 +24,7 @@ router.post("/", middleware.isLoggedIn,function(req,res){
     var image = req.body.image;
     var description= req.sanitize(req.body.description);
     var text = req.sanitize(req.body.text);
-    var tag = {name:req.body.tag};
+    var tag = [req.body.tag];
     var author = {
         id: req.user._id,
         username: req.user.username
@@ -66,7 +66,7 @@ router.get("/:id", function(req,res){
 // EDIT blog ROUTE 
 router.get("/:id/edit", middleware.checkBlogOwnership, function(req, res){
     blog.findById(req.params.id, function(err, foundBlog){
-            res.render("blog/edit", {blog: foundBlog, document:foundBlog.text});
+            res.render("blog/edit", {blog: foundBlog});
     });
 });
 
