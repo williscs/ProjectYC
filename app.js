@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var mongoose = require("mongoose");
 var house = require("./models/house");
-var blog = require("./models/blog");
+var question = require("./models/question");
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
@@ -17,7 +17,7 @@ var seedDB = require("./seeds");
 var commentRoutes = require("./routes/comments");
 var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
-var blogRoutes = require("./routes/blog");
+var questionRoutes = require("./routes/question");
 
 
 var url = process.env.DATABASEURL ||  "mongodb://localhost/house"
@@ -57,7 +57,7 @@ app.use(function(req,res,next){
 app.use("/", indexRoutes);
 app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
-app.use("/blog", blogRoutes);
+app.use("/question", questionRoutes);
 
 // app.get("/blog", function(req,res){
     // res.render("blog/index");

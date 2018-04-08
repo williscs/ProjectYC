@@ -12,14 +12,16 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="caption-full">
-                    <h4><a><%=blog.name%></a></h4>
-                    <p><%=blog.description%></p>
-                    <p><%=blog.tag%></p>
-                    <p><em>Submitted by <%=blog.author.username%></em></p>
-                    <p id="blog-text-area"><%=blog.text%></p>
-                    <% if(currentUser && blog.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-                    <a class="btn btn-warning" href="/blog/<%=blog._id%>/edit">Edit</a>
-                    <form class="delete-form" action="/blog/<%=blog._id%>?_method=DELETE" method="POST">
+                    <h4><a><%=question.name%></a></h4>
+                    <p><%=question.description%></p>
+                    <% question.tag.forEach(function(tag){ %>
+                        <p class="btn btn-secondary"><%=tag%></p>
+                    <% }) %>
+                    <p><em>Submitted by <%=question.author.username%></em></p>
+                    <p id="question-text-area"><%=question.text%></p>
+                    <% if(currentUser && question.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                    <a class="btn btn-warning" href="/question/<%=question._id%>/edit">Edit</a>
+                    <form class="delete-form" action="/question/<%=question._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                     <% } %>
@@ -27,10 +29,10 @@
             </div>
             <div class="alert alert-secondary">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/blog/<%= blog._id %>/comments/new">Add New Comment</a>
+                    <a class="btn btn-success" href="/question/<%= question._id %>/comments/new">Add New Comment</a>
                 </div>
                 <hr>
-                <% blog.comments.forEach(function(Comment){ %>
+                <% question.comments.forEach(function(Comment){ %>
                 <div class="row">
                     <div class="col-md-12">
                             <strong><%= Comment.author.username %></strong>
@@ -40,10 +42,10 @@
                         </p>
                     <% if(currentUser && Comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-xs btn-warning" 
-                            href="/housing/<%=blog._id%>/comments/<%=Comment._id%>/edit">
+                            href="/housing/<%=question._id%>/comments/<%=Comment._id%>/edit">
                             Edit
                         </a>
-                        <form class="delete-form" action="/housing/<%=blog._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
+                        <form class="delete-form" action="/housing/<%=question._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
                             <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                         </form>
                     <% } %>

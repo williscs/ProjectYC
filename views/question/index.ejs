@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to housing in ProjectYC</h1>
+            <p>Take a look at what's available near you</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/question/new">Add a new question</a>
+            </p>
+            <p>
+                <form action="/question" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="question search" class="form-control">
+                        <input type="submit" value="search" class="btn btn-default">
+                </form>
+            </p>
+        </div>
+    </header>
+    
+    <div class="card-deck text-center question">
+        <div class="col-md-9">
+            <% if(noMatch !== null) { %>
+            <h3><%= noMatch %></h3>
+            <% } %>
+        </div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-3">
+            <p class="lead">Tags</p>
+            <div class="list-group">
+                <% question.forEach(function(tag){ %>
+                <li class="list-group-item"><%=tag.tag%></li>
+                <% }) %>
+            </div>
+    </div>
+        <% question.forEach(function(question){ %>
+        <div class="col-md-9 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4><%= question.name %></h4>
+                    </div>
+                    <p>
+                        <%= question.description %>
+                    </p>
+                    <p>
+                        <a href="/question/<%= question._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div> 
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<% include ../partials/footer %>

@@ -1,12 +1,12 @@
 var mongoose = require("mongoose");
 
 // Schema setup
-var blogSchema = new mongoose.Schema({
+var questionSchema = new mongoose.Schema({
     name: String,
     image: String,
     description: String,
     text:String,
-    tag: [String],
+    tag: [],
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -22,4 +22,4 @@ var blogSchema = new mongoose.Schema({
         ]
 });
 
-module.exports = mongoose.model("blog", blogSchema);
+module.exports = mongoose.model("question", questionSchema);

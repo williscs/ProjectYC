@@ -1,6 +1,6 @@
 var house = require("../models/house");
 var comment = require("../models/comment");
-var blog = require("../models/blog")
+var question = require("../models/question")
 
 // ALL THE MIDDLEWARE GOES HERE
 var middlewareObj = {};
@@ -28,15 +28,15 @@ middlewareObj.checkHouseOwnership = function(req,res,next){
             }
 };
 
-middlewareObj.checkBlogOwnership = function(req,res,next){
+middlewareObj.checkQuestionOwnership = function(req,res,next){
         if(req.isAuthenticated()){
-                blog.findById(req.params.id, function(err, foundBlog){
+                question.findById(req.params.id, function(err, foundQuestion){
                     if(err) {
-                        req.flash("error", "Blog not found");
+                        req.flash("error", "question not found");
                         res.redirect("back");
                     } else {
-                            // Does user own blog?
-                            if(foundBlog.author.id.equals(req.user._id) || req.user.isAdmin){
+                            // Does user own question?
+                            if(foundQuestion.author.id.equals(req.user._id) || req.user.isAdmin){
                                 next();
                             } else {
                                 req.flash("error", "You don't have permission to do that");

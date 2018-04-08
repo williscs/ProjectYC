@@ -16,28 +16,28 @@ nav {
 
 
 
-/* ---------- Blog Form ------------*/
+/* ---------- question Form ------------*/
 
-.blog-submit-form {
+.question-submit-form {
     width:70%;
     margin: 50px auto;
 }
 
-/* ---------- Blog Edit Form ------------*/
+/* ---------- question Edit Form ------------*/
 
-.blog-form-group {
+.question-form-group {
     width:70%;
     margin: 50px auto;
 }
 
 
-/* ---------- Blog Page ------------*/
+/* ---------- question Page ------------*/
 
 .card-deck .card {
     margin-bottom: 20px;
 }
 
-#blog-text-area {
+#question-text-area {
     white-space: pre-wrap;
 }
 
