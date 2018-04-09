@@ -17,6 +17,7 @@ var seedDB = require("./seeds");
 var commentRoutes = require("./routes/comments");
 var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
+var questionCommentRoutes = require("./routes/questionComment");
 var questionRoutes = require("./routes/question");
 
 
@@ -58,6 +59,7 @@ app.use("/", indexRoutes);
 app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
 app.use("/question", questionRoutes);
+app.use("/question/:id/comments", questionCommentRoutes);
 
 // app.get("/blog", function(req,res){
     // res.render("blog/index");
