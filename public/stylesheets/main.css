@@ -14,6 +14,20 @@ nav {
     display:inline;
 }
 
+/* ---------- search box ------------*/
+.search-box {
+    margin-top: 20px;
+    display:inline-block;
+}
+
+.form-control {
+    margin-right:10px;
+}
+
+.popular-searches {
+    margin-top: 20px;
+}
+
 
 
 /* ---------- question Form ------------*/

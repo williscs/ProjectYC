@@ -3,19 +3,28 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h1>Welcome to housing in ProjectYC</h1>
-            <p>Take a look at what's available near you</p>
-            <p>
-                <a class="btn btn-primary btn-lg" href="/question/new">Add a new question</a>
-            </p>
-            <p>
-                <form action="/question" method="GET" class="form-inline">
-                    <div class="form-group">
-                        <input type="text" name="search" placeholder="question search" class="form-control">
-                        <input type="submit" value="search" class="btn btn-default">
-                </form>
-            </p>
-        </div>
+            <h1>Welcome to ProjectYC</h1>
+                <p>This is a collaboratively edited question and answer site for professional and enthusiast yachties</p>
+                    <form action="/question" method="GET" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="question search" class="form-control">
+                            <input type="submit" value="search" class="btn btn-success">
+                        </div>
+                    </form>
+                <div class="container popular-searches">
+                    <p> Popular questions</p>
+                    <div>
+                        <% question.forEach(function(tag){ %>
+                            <a class="btn btn-default"><%=tag.tag%></a>
+                        <% }) %>
+                    </div>
+                </div>
+                
+                <div class="search-box">
+                    <p>
+                        <a class="btn btn-primary btn-lg" href="/question/new">Add a new question</a>
+                    </p>
+                </div>
     </header>
     
     <div class="card-deck text-center question">
