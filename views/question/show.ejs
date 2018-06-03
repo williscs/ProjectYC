@@ -29,7 +29,7 @@
             </div>
             <div class="alert alert-secondary">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/question/<%= question._id %>/comments/new">Add New Comment</a>
+                    <a class="btn btn-success" href="/question/<%= question._id %>/comments/answer">Add New Comment</a>
                 </div>
                 <hr>
                 <% question.comments.forEach(function(Comment){ %>
@@ -42,10 +42,10 @@
                         </p>
                     <% if(currentUser && Comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-xs btn-warning" 
-                            href="/housing/<%=question._id%>/comments/<%=Comment._id%>/edit">
+                            href="/question/<%=question._id%>/comments/<%=Comment._id%>/edit">
                             Edit
                         </a>
-                        <form class="delete-form" action="/housing/<%=question._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
+                        <form class="delete-form" action="/question/<%=question._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
                             <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                         </form>
                     <% } %>

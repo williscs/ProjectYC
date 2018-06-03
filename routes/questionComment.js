@@ -6,13 +6,13 @@ var middleware = require("../middleware");
 
 
 // Comments new
-router.get("/new", middleware.isLoggedIn, function(req, res){
+router.get("/answer", middleware.isLoggedIn, function(req, res){
     // Find question by ID 
     question.findById(req.params.id, function(err, question){
         if(err){
             console.log(err);
         } else {
-            res.render("comments/new", {question: question});      
+            res.render("comments/answer", {question: question});      
         }
     })
 })

@@ -19,6 +19,18 @@ router.get("/", function(req,res){
                     res.render("question/index", {question: allQuestions, page: 'question', noMatch: noMatch});      
                 }
             });
+    // adding in another query for tag searches
+    } else if(req.query.tag) { 
+        question.find({tag:req.query.tag}, function(err, allTags){
+           if(err){
+               console.log("err");
+           } else {
+               if(allTags.length < 1 ){
+                   var noMatch = "Sorry, no questions match your query";
+               }
+              res.render("question/index", {question: allTags, page: 'question', noMatch: noMatch});
+           }
+        });
     // Get all questions from DB
     } else {
     question.find({}, function(err, allQuestions){

@@ -14,19 +14,22 @@
                 <div class="container popular-searches">
                     <p> Popular questions</p>
                     <div>
-                        <% question.forEach(function(tag){ %>
-                            <a class="btn btn-default"><%=tag.tag%></a>
+                        <form action="/question" method="GET" class="form-inline">
+                            <% question.forEach(function(tag){ %>
+                                <input type="submit" value="<%=tag.tag%>" name="tag" class="tag btn btn-outline-info btn-sm">
                         <% }) %>
+                        </form>
                     </div>
-                </div>
-                
+                </div>    
                 <div class="search-box">
                     <p>
                         <a class="btn btn-primary btn-lg" href="/question/new">Add a new question</a>
                     </p>
                 </div>
+                <div class="row justify-content-end">
+                     <a id="search-return" href="/question">Go back</a>
+                </div>
     </header>
-    
     <div class="card-deck text-center question">
         <div class="col-md-9">
             <% if(noMatch !== null) { %>
@@ -34,17 +37,17 @@
             <% } %>
         </div>
 <div class="container">
-    <div class="row justify-content-end">
-    <div class="col-md-3">
-            <p class="lead">Tags</p>
-            <div class="list-group">
-                <% question.forEach(function(tag){ %>
-                <li class="list-group-item"><%=tag.tag%></li>
-                <% }) %>
-            </div>
-    </div>
+    <!--<div class="row justify-content-end">-->
+    <!--<div class="col-md-3">-->
+    <!--        <p class="lead">Tags</p>-->
+    <!--        <div class="list-group">-->
+    <!--            <% question.forEach(function(tag){ %>-->
+    <!--            <li class="list-group-item"><%=tag.tag%></li>-->
+    <!--            <% }) %>-->
+    <!--        </div>-->
+    <!--</div>-->
         <% question.forEach(function(question){ %>
-        <div class="col-md-9 col-sm-6">
+        <div class="col-md-12 col-sm-6">
                 <div class="card">
                     <div class="card-body">
                         <h4><%= question.name %></h4>
