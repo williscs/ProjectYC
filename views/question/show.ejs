@@ -32,20 +32,20 @@
                     <a class="btn btn-success" href="/question/<%= question._id %>/comments/answer">Add New Comment</a>
                 </div>
                 <hr>
-                <% question.comments.forEach(function(Comment){ %>
+                <% question.answer.forEach(function(Answer){ %>
                 <div class="row">
                     <div class="col-md-12">
-                            <strong><%= Comment.author.username %></strong>
+                            <strong><%= answer.author.username %></strong>
                             <span class="float-right">10 days ago</span>
                         <p>
-                            <%= Comment.text %>
+                            <%= answer.text %>
                         </p>
-                    <% if(currentUser && Comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                    <% if(currentUser && answer.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-xs btn-warning" 
-                            href="/question/<%=question._id%>/comments/<%=Comment._id%>/edit">
+                            href="/question/<%=question._id%>/comments/<%=answer._id%>/edit">
                             Edit
                         </a>
-                        <form class="delete-form" action="/question/<%=question._id%>/comments/<%=Comment._id%>?_method=DELETE" method="POST">
+                        <form class="delete-form" action="/question/<%=question._id%>/comments/<%=answer._id%>?_method=DELETE" method="POST">
                             <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                         </form>
                     <% } %>

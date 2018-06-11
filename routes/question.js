@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var question = require("../models/question");
-var comment = require("../models/comment");
+var answer = require("../models/answer");
 var middleware = require("../middleware");
 
 // INDEX ROUTE - Show all questions
@@ -79,7 +79,7 @@ router.get("/new", function(req, res){
 // Show route
 router.get("/:id", function(req,res){
     // Find campground with provided id 
-    question.findById(req.params.id).populate("comments").exec(function(err, foundQuestion){
+    question.findById(req.params.id).populate("answers").exec(function(err, foundQuestion){
         if(err){
             console.log(err);
         } else {

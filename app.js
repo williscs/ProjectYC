@@ -9,7 +9,8 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
 var flash = require("connect-flash");
-var methodOverride = require("method-override")
+var answer = require("./models/answer");
+var methodOverride = require("method-override");
 var comment = require("./models/comment");
 var seedDB = require("./seeds");
 
@@ -17,7 +18,7 @@ var seedDB = require("./seeds");
 var commentRoutes = require("./routes/comments");
 var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
-var answerCommentRoutes = require("./routes/answerComment");
+var answerRoutes = require("./routes/answer");
 var questionRoutes = require("./routes/question");
 
 
@@ -59,7 +60,7 @@ app.use("/", indexRoutes);
 app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
 app.use("/question", questionRoutes);
-app.use("/question/:id/comments", answerCommentRoutes);
+app.use("/question/:id/comments", answerRoutes);
 
 // app.get("/blog", function(req,res){
     // res.render("blog/index");

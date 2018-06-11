@@ -14,10 +14,10 @@ var questionSchema = new mongoose.Schema({
         },
         username:String
     },
-    comments: [
+    answer: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Comment"
+            ref: "Answer"
         }
         ]
 });
