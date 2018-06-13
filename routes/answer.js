@@ -37,7 +37,7 @@ router.post("/", middleware.isLoggedIn,  function(req,res){
                     // save comment
                     answer.save();
                     // connect new answer to question
-                   question.answer.push(answer._id);
+                   question.answers.push(answer._id);
                    question.save();
                     // redirect to house show page
                     req.flash("success", "Successfully created comment");
