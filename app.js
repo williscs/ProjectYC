@@ -60,7 +60,7 @@ app.use("/", indexRoutes);
 app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
 app.use("/question", questionRoutes);
-app.use("/question/:id/comments", answerRoutes);
+app.use("/question/:id/answer", answerRoutes);
 
 // app.get("/blog", function(req,res){
     // res.render("blog/index");

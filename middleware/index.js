@@ -1,6 +1,7 @@
 var house = require("../models/house");
 var comment = require("../models/comment");
-var question = require("../models/question")
+var question = require("../models/question");
+var answer = require("../models/answer")
 
 // ALL THE MIDDLEWARE GOES HERE
 var middlewareObj = {};
@@ -60,6 +61,28 @@ middlewareObj.checkCommentOwnership = function(req,res,next){
                 } else {
                         // Does user own comment?
                         if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
+                            next();
+                        } else {
+                            req.flash("error", "You don't have permission to do that");
+                            res.redirect("back");
+                        }
+                }
+            });
+            
+        } else {
+            req.flash("error", "You need to be logged in to do that");
+            res.redirect("back");
+        }
+};
+
+middlewareObj.checkAnswerOwnership = function(req,res,next){
+    if(req.isAuthenticated()){
+            answer.findById(req.params.answer_id, function(err, foundAnswer){
+                if(err) {
+                    res.redirect("back");
+                } else {
+                        // Does user own answer?
+                        if(foundAnswer.author.id.equals(req.user._id) || req.user.isAdmin){
                             next();
                         } else {
                             req.flash("error", "You don't have permission to do that");

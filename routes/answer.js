@@ -6,13 +6,13 @@ var middleware = require("../middleware");
 
 
 // Comments new
-router.get("/answer", middleware.isLoggedIn, function(req, res){
+router.get("/new", middleware.isLoggedIn, function(req, res){
     // Find question by ID 
     question.findById(req.params.id, function(err, question){
         if(err){
             console.log(err);
         } else {
-            res.render("comments/answer", {question: question});      
+            res.render("answer/new", {question: question});      
         }
     })
 })
@@ -49,19 +49,19 @@ router.post("/", middleware.isLoggedIn,  function(req,res){
 });
 
 // COMMENT EDIT ROUTE
-router.get("/:comment_id/edit", middleware.checkCommentOwnership,  function(req,res){
-    answer.findById(req.params.comment_id, function(err, foundComment){
+router.get("/:answer_id/edit", middleware.checkAnswerOwnership,  function(req,res){
+    answer.findById(req.params.answer_id, function(err, foundAnswer){
         if(err){
             res.redirect("back");
         } else {
-            res.render("answer/edit", {question_id : req.params.id, comment: foundComment});     
+            res.render("answer/edit", {question_id : req.params.id, answer: foundAnswer});     
         }
     });
 });
 
 // COMMENT UPDATE ROUTE
-router.put("/:comment_id", middleware.checkCommentOwnership, function(req,res){
-    answer.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+router.put("/:answer_id", middleware.checkAnswerOwnership, function(req,res){
+    answer.findByIdAndUpdate(req.params.answer_id, req.body.answer, function(err, updatedAnswer){
         if(err){
             res.redirect("back")
         } else {
@@ -73,12 +73,12 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req,res){
 
 
 // COMMENT DESTROY ROUTE 
-router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
-    answer.findByIdAndRemove(req.params.comment_id, function(err){
+router.delete("/:answer_id", middleware.checkAnswerOwnership, function(req, res){
+    answer.findByIdAndRemove(req.params.answer_id, function(err){
        if(err){
            res.redirect("back");
        } else {
-           req.flash("success", "Comment deleted");
+           req.flash("success", "Answer deleted");
            res.redirect("/question/" + req.params.id);
        }
     });
