@@ -8,7 +8,13 @@ var answerSchema = mongoose.Schema({
             ref: "User"
         },
         username: String
-    }
+    },
+    votes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "avote"
+        }
+        ]
 }); 
 
 module.exports = mongoose.model("Answer", answerSchema);

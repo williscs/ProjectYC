@@ -5,7 +5,7 @@ var answer = require("../models/answer");
 var middleware = require("../middleware");
 
 
-// Comments new
+// New answer
 router.get("/new", middleware.isLoggedIn, function(req, res){
     // Find question by ID 
     question.findById(req.params.id, function(err, question){
@@ -17,7 +17,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
     })
 })
 
-// Comments create
+// Answer create
 router.post("/", middleware.isLoggedIn,  function(req,res){
     //lookup house using ID
     question.findById(req.params.id, function(err, question){
@@ -48,7 +48,7 @@ router.post("/", middleware.isLoggedIn,  function(req,res){
     });
 });
 
-// COMMENT EDIT ROUTE
+// ANSWER EDIT ROUTE
 router.get("/:answer_id/edit", middleware.checkAnswerOwnership,  function(req,res){
     answer.findById(req.params.answer_id, function(err, foundAnswer){
         if(err){
@@ -59,7 +59,7 @@ router.get("/:answer_id/edit", middleware.checkAnswerOwnership,  function(req,re
     });
 });
 
-// COMMENT UPDATE ROUTE
+// ANSWER UPDATE ROUTE
 router.put("/:answer_id", middleware.checkAnswerOwnership, function(req,res){
     answer.findByIdAndUpdate(req.params.answer_id, req.body.answer, function(err, updatedAnswer){
         if(err){
@@ -72,7 +72,7 @@ router.put("/:answer_id", middleware.checkAnswerOwnership, function(req,res){
 
 
 
-// COMMENT DESTROY ROUTE 
+// ANSWER DESTROY ROUTE 
 router.delete("/:answer_id", middleware.checkAnswerOwnership, function(req, res){
     answer.findByIdAndRemove(req.params.answer_id, function(err){
        if(err){
