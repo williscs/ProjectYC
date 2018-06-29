@@ -40,6 +40,7 @@
                         <p>
                             <%= Answer.text %>
                         </p>
+                        <form action="/answer"
                         
                         
                         <!--Here we have an example of the tag get request which search for questions with a specific tag-->
@@ -49,8 +50,8 @@
                                 <% }) %>
                             </form>
                             
-                            <!--Here we have an example of a post request for a new answer-->
-                            <form action="/question/<%= question._id %>/answer" method="POST">
+                            <!--This form is now set up to post to the avote route-->
+                            <form action="/question/<%= question._id %>/answer/<%= answer._id %>/avote" method="POST">
                                 <div class="form-group">
                                     <textarea class="form-control" type="text" name="answer[text]" placeholder="text" rows="10"><%=answer.text%></textarea>
                                 </div>

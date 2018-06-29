@@ -10,6 +10,7 @@ var LocalStrategy = require("passport-local");
 var User = require("./models/user");
 var flash = require("connect-flash");
 var answer = require("./models/answer");
+var avote = require("./models/avote");
 var methodOverride = require("method-override");
 var comment = require("./models/comment");
 var seedDB = require("./seeds");
@@ -20,6 +21,7 @@ var houseRoutes = require("./routes/house");
 var indexRoutes = require("./routes/index");
 var answerRoutes = require("./routes/answer");
 var questionRoutes = require("./routes/question");
+var avoteRoutes = require("./routes/avote");
 
 
 var url = process.env.DATABASEURL ||  "mongodb://localhost/house"
@@ -61,6 +63,9 @@ app.use("/housing", houseRoutes);
 app.use("/housing/:id/comments", commentRoutes);
 app.use("/question", questionRoutes);
 app.use("/question/:id/answer", answerRoutes);
+
+// Route for a vote. This will not be a page, but just a post route for the vote
+app.use("/question/:id/answer/:id/avote", avoteRoutes);
 
 // app.get("/blog", function(req,res){
     // res.render("blog/index");
