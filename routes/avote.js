@@ -17,7 +17,13 @@ router.post("/", function(req,res){
        } else {
         //   Lookup answer in the database
         answer.findById(req.params.id, function (err, question){
-            
+            if(err){
+                req.flash("error", "something went wrong");
+                console.log(err);
+                res.redirect("/question");
+            } else {
+                
+            }
         })
        }
     });
@@ -29,14 +35,14 @@ router.post("/", function(req,res){
             console.log(err);
             res.redirect("/question");
         } else {
-            // create new answer
-            answer.create(req.body.answer, function(err, answer){
+            // create new vote
+            avote.create(req.body.avote, function(err, vote){
                 if(err){
                     console.log(err);
                 } else {
                     // add username and id to comment
-                    answer.author.id = req.user._id;
-                    answer.author.username = req.user.username;
+                    vote.author.id = req.user._id;
+                    vote.author.username = req.user.username;
                     // save comment
                     answer.save();
                     // connect new answer to question
