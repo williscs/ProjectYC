@@ -22,7 +22,18 @@ router.post("/", function(req,res){
                 console.log(err);
                 res.redirect("/question");
             } else {
-                
+                // create a vote
+                avote.create(req.body.avote, function (err, avote){
+                    if(err){
+                        console.log(err);
+                    } else {
+                    // add username and id to comment
+                    avote.author.id = req.user._id;
+                    avote.author.username = req.user.username;
+                    // save comment
+                    avote.save();
+                    }
+                })
             }
         })
        }
