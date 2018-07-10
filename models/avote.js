@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var avoteSchema = mongoose.Schema({
-    vote: Number,
+    vote: [],
     author: {
         id:{
             type:mongoose.Schema.Types.ObjectId,

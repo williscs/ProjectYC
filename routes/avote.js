@@ -16,7 +16,7 @@ router.post("/", function(req,res){
            res.redirect("/question");
        } else {
         //   Lookup answer in the database
-        answer.findById(req.params.id, function (err, question){
+        answer.findById(req.params.id, function (err, answer){
             if(err){
                 req.flash("error", "something went wrong");
                 console.log(err);
@@ -27,44 +27,21 @@ router.post("/", function(req,res){
                     if(err){
                         console.log(err);
                     } else {
-                    // add username and id to comment
+                    // get data from form and add to question array
+                    var vote = req.body.vote
+                    // add username and id to avote
                     avote.author.id = req.user._id;
                     avote.author.username = req.user.username;
                     // save comment
                     avote.save();
+                    // connect new vote to answer
+                    answer.votes.push(avote._id);
+                    answer.save();
                     }
                 })
             }
         })
-       }
-    });
-    
-    //lookup answer in the database
-    answer.findById(req.params.id, function(err, question){
-        if(err){
-            req.flash("error", "Something went wrong");
-            console.log(err);
-            res.redirect("/question");
-        } else {
-            // create new vote
-            avote.create(req.body.avote, function(err, vote){
-                if(err){
-                    console.log(err);
-                } else {
-                    // add username and id to comment
-                    vote.author.id = req.user._id;
-                    vote.author.username = req.user.username;
-                    // save comment
-                    answer.save();
-                    // connect new answer to question
-                   question.answers.push(answer._id);
-                   question.save();
-                    // redirect to house show page
-                    req.flash("success", "Successfully created comment");
-                   res.redirect('/question/' + question._id);
-                }
-            })
-        }
+      }
     });
 });
 
